@@ -11,7 +11,7 @@ pub fn process_ascii_iter(
         Ok(line) => line.trim().strip_prefix("vertex").and_then(|coords| {
             if coords.starts_with(char::is_whitespace) {
                 // enter branch if line is [:space:]*vertex[:space:]*.*
-                let mut parts = coords.trim_start().split_whitespace();
+                let mut parts = coords.split_whitespace();
                 match (parts.next(), parts.next(), parts.next()) {
                     (Some(x_str), Some(y_str), Some(z_str)) => {
                         match (

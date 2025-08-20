@@ -3,16 +3,16 @@ use std::error::Error;
 use vtkio::model::IOBuffer;
 use vtkio::Vtk;
 
+pub type GeometryResult = Result<(Vec<f64>, Vec<usize>, Vec<usize>), Box<dyn Error>>;
+
 pub struct GeometryExtractor;
 
 impl GeometryExtractor {
-    pub fn extract_geometry(
-        vtk: &Vtk,
-    ) -> Result<(Vec<f64>, Vec<usize>, Vec<usize>), Box<dyn Error>> {
+    pub fn extract_geometry(vtk: &Vtk) -> GeometryResult {
         let poly_data = get_poly_data(vtk)?;
 
         let points = Self::extract_points(&poly_data.points)?;
-        let (connectivity, offsets) = Self::extract_connectivity(&poly_data);
+        let (connectivity, offsets) = Self::extract_connectivity(poly_data);
 
         Ok((points, connectivity, offsets))
     }

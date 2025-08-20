@@ -6,7 +6,7 @@ pub mod geometry;
 pub mod reader;
 
 use field_manager::FieldManager;
-use geometry::GeometryExtractor;
+use geometry::{GeometryExtractor, GeometryResult};
 use reader::VtkReader;
 use std::error::Error;
 
@@ -20,7 +20,7 @@ impl VtpProcessor {
         Ok(VtpProcessor { reader })
     }
 
-    pub fn geometry(&self) -> Result<(Vec<f64>, Vec<usize>, Vec<usize>), Box<dyn Error>> {
+    pub fn geometry(&self) -> GeometryResult {
         GeometryExtractor::extract_geometry(self.reader.vtk())
     }
 
