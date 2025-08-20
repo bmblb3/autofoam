@@ -1,25 +1,19 @@
 use std::{
-    env,
     fs::File,
     io::{BufRead, BufReader, Read, Seek, SeekFrom},
 };
 
-fn main() {
-    let args: Vec<String> = env::args().skip(1).collect();
+use clap::Parser;
+mod args;
 
-    if args.is_empty() {
-        eprintln!(
-            "Usage: {} <file.stl> [file2.stl ...]",
-            env::args().next().unwrap()
-        );
-        std::process::exit(1);
-    }
+fn main() {
+    let args = args::Args::parse();
 
     let mut min = [f32::INFINITY; 3];
     let mut max = [f32::NEG_INFINITY; 3];
     let mut vertex_count = 0;
 
-    for path in &args {
+    for path in &args.files {
         let mut file = File::open(path).unwrap_or_else(|e| {
             eprintln!("Failed to open {}: {}", path, e);
             std::process::exit(1);
