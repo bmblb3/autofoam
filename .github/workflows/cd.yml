@@ -3,10 +3,9 @@ name: CD # Continuous Deployment
 on:
   push:
     tags:
-      - '[v]?[0-9]+.[0-9]+.[0-9]+'
+      - "[v]?[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
-
   publish:
     name: Publishing for ${{ matrix.job.os-name }}-${{ matrix.job.architecture }}
     runs-on: ${{ matrix.job.os }}
@@ -54,22 +53,20 @@ jobs:
         uses: taiki-e/install-action@v2
         with:
           tool: cross
-      - name: Build release binary
+      - name: Build release binaries
         run: cross build --locked --release --target ${{ matrix.job.target }}
 
       - name: install strip command
         if: matrix.job.target == 'aarch64-unknown-linux-gnu'
         shell: bash
         run: |
-            sudo apt update
-            sudo apt-get install -y binutils-aarch64-linux-gnu
-      - name: Packaging final binary
+          sudo apt update
+          sudo apt-get install -y binutils-aarch64-linux-gnu
+      - name: Packaging final binaries
         shell: bash
         run: |
-          BINARY=target/${{ matrix.job.target }}/release/autofoam
-          if [[ ${{ runner.os }} == 'Windows' ]]; then
-            BINARY=$BINARY.exe
-          fi
+          # Define all binaries
+          BINARIES=("autofoam-scalar-area-threshold" "autofoam-stl-bbox")
 
           ####### reduce binary size by removing debug symbols #######
           if [[ ${{ matrix.job.target }} == aarch64-unknown-linux-gnu ]]; then
@@ -77,14 +74,27 @@ jobs:
           else
             GCC_PREFIX=""
           fi
-          "$GCC_PREFIX"strip $BINARY
 
-          ########## create tar.gz ##########
           mkdir assets
-          RELEASE_NAME=autofoam-${GITHUB_REF/refs\/tags\//}-${{ matrix.job.os-name }}-${{ matrix.job.architecture }}
-          tar czvf assets/$RELEASE_NAME.tar.gz $BINARY
 
-          ########## create sha256 ##########
+          # Strip all binaries
+          BINARY_PATHS=()
+          for BINARY_NAME in "${BINARIES[@]}"; do
+            BINARY=target/${{ matrix.job.target }}/release/$BINARY_NAME
+            if [[ ${{ runner.os }} == 'Windows' ]]; then
+              BINARY=$BINARY.exe
+            fi
+
+            # Strip binary
+            "$GCC_PREFIX"strip $BINARY
+            BINARY_PATHS+=($BINARY)
+          done
+
+          # Create single tar.gz with all binaries
+          RELEASE_NAME=autofoam-${GITHUB_REF/refs\/tags\//}-${{ matrix.job.os-name }}-${{ matrix.job.architecture }}
+          tar czvf assets/$RELEASE_NAME.tar.gz "${BINARY_PATHS[@]}"
+
+          # Create sha256 for the package
           if [[ ${{ runner.os }} == 'Windows' ]]; then
             certutil -hashfile assets/$RELEASE_NAME.tar.gz sha256 | grep -E [A-Fa-f0-9]{64} > assets/$RELEASE_NAME.sha256
           else
