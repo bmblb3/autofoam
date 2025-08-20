@@ -42,3 +42,148 @@ pub fn calculate_polygon_areas(
 
     areas
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_triangle_area() {
+        let points = vec![
+            0.0, 0.0, 0.0, // vertex 0
+            1.0, 0.0, 0.0, // vertex 1
+            0.0, 1.0, 0.0, // vertex 2
+        ];
+        let connectivity = vec![0, 1, 2];
+        let offsets = vec![3];
+
+        let areas = calculate_polygon_areas(&points, &connectivity, &offsets);
+        assert_eq!(areas.len(), 1);
+        assert!((areas[0] - 0.5).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_xnorm_square_area() {
+        let points = vec![
+            0.0, 0.0, 0.0, // vertex 0
+            0.0, 1.0, 0.0, // vertex 1
+            0.0, 1.0, 1.0, // vertex 2
+            0.0, 0.0, 1.0, // vertex 3
+        ];
+        let connectivity = vec![0, 1, 2, 3];
+        let offsets = vec![4];
+
+        let areas = calculate_polygon_areas(&points, &connectivity, &offsets);
+        assert_eq!(areas.len(), 1);
+        assert!((areas[0] - 1.0).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_ynorm_square_area() {
+        let points = vec![
+            0.0, 0.0, 0.0, // vertex 0
+            0.0, 0.0, 1.0, // vertex 1
+            1.0, 0.0, 1.0, // vertex 2
+            1.0, 0.0, 0.0, // vertex 3
+        ];
+        let connectivity = vec![0, 1, 2, 3];
+        let offsets = vec![4];
+
+        let areas = calculate_polygon_areas(&points, &connectivity, &offsets);
+        assert_eq!(areas.len(), 1);
+        assert!((areas[0] - 1.0).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_znorm_square_area() {
+        let points = vec![
+            0.0, 0.0, 0.0, // vertex 0
+            1.0, 0.0, 0.0, // vertex 1
+            1.0, 1.0, 0.0, // vertex 2
+            0.0, 1.0, 0.0, // vertex 3
+        ];
+        let connectivity = vec![0, 1, 2, 3];
+        let offsets = vec![4];
+
+        let areas = calculate_polygon_areas(&points, &connectivity, &offsets);
+        assert_eq!(areas.len(), 1);
+        assert!((areas[0] - 1.0).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_multiple_polygons() {
+        // Two triangles
+        let points = vec![
+            0.0, 0.0, 0.0, // vertex 0 - first triangle, 0.5 area
+            1.0, 0.0, 0.0, // vertex 1
+            0.0, 1.0, 0.0, // vertex 2
+            2.0, 0.0, 0.0, // vertex 3 - second triangle, 1.0 area
+            4.0, 0.0, 0.0, // vertex 4
+            3.0, 1.0, 0.0, // vertex 5
+        ];
+        let connectivity = vec![0, 1, 2, 3, 4, 5];
+        let offsets = vec![3, 6];
+
+        let areas = calculate_polygon_areas(&points, &connectivity, &offsets);
+        assert_eq!(areas.len(), 2);
+        assert!((areas[0] - 0.5).abs() < 1e-10);
+        assert!((areas[1] - 1.0).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_degenerate_polygon_less_than_3_vertices() {
+        let points = vec![
+            0.0, 0.0, 0.0, // vertex 0
+            1.0, 0.0, 0.0, // vertex 1
+        ];
+        let connectivity = vec![0, 1];
+        let offsets = vec![2];
+
+        let areas = calculate_polygon_areas(&points, &connectivity, &offsets);
+        assert_eq!(areas.len(), 1);
+        assert_eq!(areas[0], 0.0);
+    }
+
+    #[test]
+    fn test_empty_polygon() {
+        let points = vec![];
+        let connectivity = vec![];
+        let offsets = vec![0];
+
+        let areas = calculate_polygon_areas(&points, &connectivity, &offsets);
+        assert_eq!(areas.len(), 1);
+        assert_eq!(areas[0], 0.0);
+    }
+
+    #[test]
+    fn test_3d_triangle() {
+        let points = vec![
+            0.0, 0.0, 0.0, // vertex 0
+            1.0, 0.0, 1.0, // vertex 1
+            0.0, 1.0, 1.0, // vertex 2
+        ];
+        let connectivity = vec![0, 1, 2];
+        let offsets = vec![3];
+
+        let areas = calculate_polygon_areas(&points, &connectivity, &offsets);
+        assert_eq!(areas.len(), 1);
+        let expected_area = (3.0_f64).sqrt() / 2.0; // area verified in blender
+        assert!((areas[0] - expected_area).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_collinear_points() {
+        // Three collinear points should have zero area
+        let points = vec![
+            0.0, 0.0, 0.0, // vertex 0
+            1.0, 0.0, 0.0, // vertex 1
+            2.0, 0.0, 0.0, // vertex 2
+        ];
+        let connectivity = vec![0, 1, 2];
+        let offsets = vec![3];
+
+        let areas = calculate_polygon_areas(&points, &connectivity, &offsets);
+        assert_eq!(areas.len(), 1);
+        assert!(areas[0].abs() < 1e-10);
+    }
+}
