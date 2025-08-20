@@ -1,3 +1,3 @@
 pub mod coordinates;
 pub mod stl;
-pub mod vtp;
+pub mod vtk;

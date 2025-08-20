@@ -2,13 +2,13 @@ use clap::Parser;
 use std::error::Error;
 mod args;
 use args::Args;
-use autofoam::vtp::calculate_polygon_areas;
-use autofoam::vtp::VtkReader as VtpReader;
+use autofoam::vtk::calculate_polygon_areas;
+use autofoam::vtk::VtpProcessor;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let args = Args::parse();
 
-    let vtp = VtpReader::from_file(&args.file)?;
+    let vtp = VtpProcessor::from_file(&args.file)?;
     let (points, connectivity, offsets) = vtp.geometry()?;
     let scalar_vec = vtp.field(&args.field)?;
 
