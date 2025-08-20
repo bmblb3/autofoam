@@ -1,3 +1,5 @@
+use autofoam::coordinates::update_coordinate_bounds;
+use autofoam::stl::is_ascii;
 use std::{
     fs::File,
     io::{BufRead, BufReader, Read, Seek, SeekFrom},
@@ -43,13 +45,6 @@ fn main() {
     );
 }
 
-fn is_ascii(file: &mut File) -> bool {
-    let mut header = [0u8; 5];
-    file.read_exact(&mut header).expect("File too short");
-    file.rewind().expect("Seek failed");
-    header.starts_with(b"solid")
-}
-
 fn process_ascii(
     file: File,
     min: &mut [f32; 3],
@@ -64,7 +59,7 @@ fn process_ascii(
                 let x = parts[0].parse::<f32>().expect("Invalid vertex coordinate");
                 let y = parts[1].parse::<f32>().expect("Invalid vertex coordinate");
                 let z = parts[2].parse::<f32>().expect("Invalid vertex coordinate");
-                update_bounds([x, y, z], min, max);
+                update_coordinate_bounds([x, y, z], min, max);
                 count += 1;
             }
         }
@@ -94,22 +89,11 @@ fn process_binary(
             file.read_exact(&mut buf)?;
             let z = f32::from_le_bytes(buf);
 
-            update_bounds([x, y, z], min, max);
+            update_coordinate_bounds([x, y, z], min, max);
         }
 
         file.seek(SeekFrom::Current(2))?; // Skip attributes
     }
 
     Ok(triangle_count * 3)
-}
-
-fn update_bounds(vertex: [f32; 3], min: &mut [f32; 3], max: &mut [f32; 3]) {
-    for i in 0..3 {
-        if vertex[i] < min[i] {
-            min[i] = vertex[i];
-        }
-        if vertex[i] > max[i] {
-            max[i] = vertex[i];
-        }
-    }
 }
