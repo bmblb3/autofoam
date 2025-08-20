@@ -7,6 +7,10 @@ pub fn is_ascii(file: &mut File) -> bool {
     let mut header = [0u8; 5];
     file.read_exact(&mut header).expect("File too short");
     file.rewind().expect("Seek failed");
+    // https://en.wikipedia.org/wiki/STL_(file_format)
+    // "A binary STL file ... should never
+    // begin with the ASCII representation
+    // of the string `solid`"
     header.starts_with(b"solid")
 }
 
