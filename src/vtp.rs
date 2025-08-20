@@ -62,7 +62,6 @@ impl VtkReader {
         }
     }
 
-    #[allow(dead_code)]
     pub fn list_fields(&self) -> Result<Vec<String>, Box<dyn Error>> {
         let poly_data = get_poly_data(&self.vtk)?;
         Ok(poly_data
