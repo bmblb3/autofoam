@@ -2,7 +2,7 @@ use clap::Parser;
 use std::error::Error;
 mod args;
 use args::Args;
-use autofoam::polygon_areas::calculate_polygon_areas;
+use autofoam::vtp::calculate_polygon_areas;
 use autofoam::vtp::VtkReader as VtpReader;
 
 fn main() -> Result<(), Box<dyn Error>> {

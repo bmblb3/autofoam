@@ -1,3 +1,5 @@
+pub mod polygon_areas;
+pub use polygon_areas::calculate_polygon_areas;
 use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
