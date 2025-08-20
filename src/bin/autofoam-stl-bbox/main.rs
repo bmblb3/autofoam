@@ -1,6 +1,7 @@
 use autofoam::coordinates::update_coordinate_bounds;
 use autofoam::stl::{is_ascii, process_ascii_iter, process_binary_iter};
 use std::fs::File;
+use std::io::Seek;
 
 use clap::Parser;
 mod args;
@@ -18,18 +19,17 @@ fn main() {
         });
 
         let mut count = 0;
-        if is_ascii(&mut file) {
-            process_ascii_iter(file).for_each(|vertex_result| match vertex_result {
-                Ok(coords) => {
-                    update_coordinate_bounds(coords, &mut min, &mut max);
-                    count += 1;
-                }
-                Err(e) => {
-                    eprintln!("Error processing file {}: {}", path, e);
-                }
-            });
+        let is_ascii_file = is_ascii(&mut file);
+        file.seek(std::io::SeekFrom::Start(0)).unwrap();
+
+        let iter: Box<dyn Iterator<Item = Result<[f32; 3], _>>> = if is_ascii_file {
+            Box::new(process_ascii_iter(file))
         } else {
-            process_binary_iter(file).for_each(|vertex_result| match vertex_result {
+            Box::new(process_binary_iter(file))
+        };
+
+        for vertex_result in iter {
+            match vertex_result {
                 Ok(coords) => {
                     update_coordinate_bounds(coords, &mut min, &mut max);
                     count += 1;
@@ -37,12 +37,12 @@ fn main() {
                 Err(e) => {
                     eprintln!("Error processing file {}: {}", path, e);
                 }
-            });
+            }
         }
 
         if count == 0 {
             eprintln!("No vertices found in file {}", path);
-            std::process::exit(1);
+            continue;
         }
     }
 
