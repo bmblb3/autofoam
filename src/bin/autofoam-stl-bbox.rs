@@ -1,9 +1,10 @@
-use autofoam::coordinates::update_coordinate_bounds;
-use autofoam::stl::{is_ascii, process_ascii_iter, process_binary_iter};
 use std::fs::File;
 use std::io::Seek;
 
 use clap::Parser;
+
+use autofoam::coordinates::update_coordinate_bounds;
+use autofoam::stl::{is_ascii, process_ascii_iter, process_binary_iter};
 
 #[derive(Parser)]
 #[command(about = "Prints the bbox of input stl file(s)")]
