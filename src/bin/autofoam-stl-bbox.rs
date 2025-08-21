@@ -4,10 +4,16 @@ use std::fs::File;
 use std::io::Seek;
 
 use clap::Parser;
-mod args;
+
+#[derive(Parser)]
+#[command(about = "Prints the bbox of input stl file(s)")]
+pub struct Args {
+    #[arg(help = "Path(s) to .vtp file(s)", required = true, value_hint = clap::ValueHint::FilePath)]
+    pub files: Vec<String>,
+}
 
 fn main() {
-    let args = args::Args::parse();
+    let args = Args::parse();
 
     let mut min = [f32::INFINITY; 3];
     let mut max = [f32::NEG_INFINITY; 3];
