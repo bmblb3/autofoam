@@ -30,20 +30,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **BINARY**: Scalar deviation CLI tool for VTP files (`autofoam-scalar-deviation`)
-- Simple description to README
+- **Binary**: Scalar deviation CLI tool for VTP files (`autofoam-scalar-deviation`)
+- **Documentation**: Simple description to README
 
 ### Changed
 
-- Simplify GitHub workflow to use release_plz (faulty implementation, fixed in later versions)
-- Build assets only for linux-x86_64
-- Refactor `autofoam-scalar-area-threshold` into libraries with tests
+- **CI/CD**: Simplify GitHub workflow to use release_plz (faulty implementation, fixed in later versions)
+- **CI/CD**: Build assets only for linux-x86_64
+- **Library**: Refactor `autofoam-scalar-area-threshold` into libraries with tests
 
 ## [0.2.1](https://github.com/bmblb3/autofoam/compare/v0.2.0...v0.2.1) - 2025-08-20
 
 ### Fixed
 
-- Build assets for both binaries: `autofoam-scalar-area-threshold` and `autofoam-stl-bbox`
+- **CD/CD**: Build assets for both binaries: `autofoam-scalar-area-threshold` and `autofoam-stl-bbox`
 
 ## [0.2.0](https://github.com/bmblb3/autofoam/compare/v0.1.0...v0.2.0) - 2025-08-20
 
