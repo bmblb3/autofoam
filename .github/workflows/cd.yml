@@ -71,7 +71,7 @@ jobs:
           strip "${BINARIES[@]}"
           LATEST_TAG=$(git describe --tags --abbrev=0)
           RELEASE_NAME=autofoam-${LATEST_TAG}-linux-x86_64
-          tar czvf assets/$RELEASE_NAME.tar.gz "${BINARIES[@]}"
+          tar czvf assets/$RELEASE_NAME.tar.gz -C target/release "${BINARIES[@]##*/}"
           shasum -a 256 assets/$RELEASE_NAME.tar.gz > assets/$RELEASE_NAME.sha256
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
