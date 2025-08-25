@@ -63,15 +63,16 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-      - run: cargo build --locked --release
+          targets: x86_64-unknown-linux-musl
+      - run: cargo build --locked --release --target x86_64-unknown-linux-musl
       - shell: bash
         run: |
           mkdir -p assets
-          mapfile -t BINARIES < <(find target/release -maxdepth 1 -type f -executable)
+          mapfile -t BINARIES < <(find target/x86_64-unknown-linux-musl/release -maxdepth 1 -type f -executable)
           strip "${BINARIES[@]}"
           LATEST_TAG=$(git describe --tags --abbrev=0)
           RELEASE_NAME=autofoam-${LATEST_TAG}-linux-x86_64
-          tar czvf assets/"$RELEASE_NAME".tar.gz -C target/release "${BINARIES[@]##*/}"
+          tar czvf assets/"$RELEASE_NAME".tar.gz -C target/x86_64-unknown-linux-musl/release "${BINARIES[@]##*/}"
           shasum -a 256 assets/"$RELEASE_NAME".tar.gz >assets/"$RELEASE_NAME".sha256
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
