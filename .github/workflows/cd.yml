@@ -42,7 +42,7 @@ jobs:
       - shell: bash
         run: |
           mkdir assets
-          BINARIES=(target/release/autofoam-scalar-area-threshold target/release/autofoam-stl-bbox)
+          BINARIES=(target/release/autofoam-scalar-area-threshold target/release/autofoam-scalar-deviation target/release/autofoam-stl-bbox)
           strip "${BINARIES[@]}"
           RELEASE_NAME=autofoam-${GITHUB_REF/refs\/tags\//}-linux-x86_64
           tar czvf assets/$RELEASE_NAME.tar.gz "${BINARIES[@]}"
