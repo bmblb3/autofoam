@@ -11,32 +11,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- *(ci/cd)* binaries are now autodiscovered
-- *(ci/cd)* binaries now available in the top-level dir of the tar file
-
-### Other
-
-- update changelog formatting and entries
+- **CI/CD**: binaries are now autodiscovered, and are available in the top-level dir of the tar file
 
 ## [0.2.4](https://github.com/bmblb3/autofoam/compare/v0.2.3...v0.2.4) - 2025-08-25
 
 ### Fixed
 
-- CI/CD pipeline: Now, when a PR is merged to master, the CD pipeline autobumps the version and creates a PR.
+- **CI/CD**: Now, when a PR is merged to master, the CD pipeline autobumps the version and creates a PR.
   On merging this new PR, the CD pipeline builds the binaries and publishes the updated packages.
 
 ## [0.2.3](https://github.com/bmblb3/autofoam/compare/v0.2.2...v0.2.3) - 2025-08-25
 
 ### Fixed
 
-- Release asset creation and tagging
-- Add `autofoam-scalar-deviation` binary to GitHub Actions
+- **CI/CD**: Release asset creation and tagging
 
 ## [0.2.2](https://github.com/bmblb3/autofoam/compare/v0.2.1...v0.2.2) - 2025-08-25
 
 ### Added
 
-- Scalar deviation CLI tool for VTP files (`autofoam-scalar-deviation`)
+- **BINARY**: Scalar deviation CLI tool for VTP files (`autofoam-scalar-deviation`)
 - Simple description to README
 
 ### Changed
