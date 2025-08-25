@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.5](https://github.com/bmblb3/autofoam/compare/v0.2.4...v0.2.5) - 2025-08-25
+
+### Fixed
+
+- *(ci/cd)* binaries are now autodiscovered
+- *(ci/cd)* binaries now available in the top-level dir of the tar file
+
+### Other
+
+- update changelog formatting and entries
+
 ## [0.2.4](https://github.com/bmblb3/autofoam/compare/v0.2.3...v0.2.4) - 2025-08-25
 
 ### Fixed
