@@ -11,8 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- *(cd)* rename the binary
-- *(cd)* compile with musl target for truly static builds
+- **CI/CD**: Compile with musl target for truly static builds
+             Rename the build tarfile asset accordingly.
 
 ### Other
 
