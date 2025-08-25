@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2](https://github.com/bmblb3/autofoam/compare/v0.2.1...v0.2.2) - 2025-08-25
+
+### Added
+
+- add scalar deviation CLI tool for VTP files
+
+### Other
+
+- add a simple description to README
+- simplify gh workflow to use release_plz
+    - only build for linux-x86_64, remove the prev targets in the matrix
+- refacgor scalar-area-threshold into libraries, add tests
+
 ## [0.2.1] - 2025-08-20
 
 ### Fixed
