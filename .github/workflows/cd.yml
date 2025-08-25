@@ -67,12 +67,12 @@ jobs:
       - shell: bash
         run: |
           mkdir -p assets
-          BINARIES=(target/release/autofoam-scalar-area-threshold target/release/autofoam-scalar-deviation target/release/autofoam-stl-bbox)
+          mapfile -t BINARIES < <(find target/release -maxdepth 1 -type f -executable)
           strip "${BINARIES[@]}"
           LATEST_TAG=$(git describe --tags --abbrev=0)
           RELEASE_NAME=autofoam-${LATEST_TAG}-linux-x86_64
-          tar czvf assets/$RELEASE_NAME.tar.gz -C target/release "${BINARIES[@]##*/}"
-          shasum -a 256 assets/$RELEASE_NAME.tar.gz > assets/$RELEASE_NAME.sha256
+          tar czvf assets/"$RELEASE_NAME".tar.gz -C target/release "${BINARIES[@]##*/}"
+          shasum -a 256 assets/"$RELEASE_NAME".tar.gz >assets/"$RELEASE_NAME".sha256
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: softprops/action-gh-release@v2
