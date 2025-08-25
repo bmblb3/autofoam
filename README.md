@@ -1,4 +1,5 @@
 # autofoam
+Repo for autofoam and related tools
 
 [![Crates.io](https://img.shields.io/crates/v/autofoam.svg)](https://crates.io/crates/autofoam)
 [![Docs.rs](https://docs.rs/autofoam/badge.svg)](https://docs.rs/autofoam)
