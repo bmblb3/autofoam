@@ -11,8 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Other
 
-- *(changelog)* fix formatting and remove duplicate entry
-- add pre-commit config and minor cleanup
+- add pre-commit config
 
 ## [0.2.7](https://github.com/bmblb3/autofoam/compare/v0.2.6...v0.2.7) - 2025-08-25
 
