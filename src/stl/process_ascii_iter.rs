@@ -125,7 +125,7 @@ vertex 4.0 5.0 6.0";
 vertex 1.0 2.0 3.0
 vertex  4.0 5.0 6.0
 vertex 7.0  8.0 9.0
-vertex 10.0 11.0 12.0 
+vertex 10.0 11.0 12.0
 \tvertex\t13.0\t14.0\t15.0\t";
         let file = create_test_file(content);
 

@@ -23,7 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Other
 
 - update CHANGELOG
-- update CHANGELOG
 
 ## [0.2.5](https://github.com/bmblb3/autofoam/compare/v0.2.4...v0.2.5) - 2025-08-25
 
@@ -36,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - **CI/CD**: Now, when a PR is merged to master, the CD pipeline autobumps the version and creates a PR.
-  On merging this new PR, the CD pipeline builds the binaries and publishes the updated packages.
+             On merging this new PR, the CD pipeline builds the binaries and publishes the updated packages.
 
 ## [0.2.3](https://github.com/bmblb3/autofoam/compare/v0.2.2...v0.2.3) - 2025-08-25
 
