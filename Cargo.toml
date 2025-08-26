@@ -1,6 +1,6 @@
 [package]
 name = "autofoam"
-version = "0.2.7"
+version = "0.2.8"
 edition = "2021"
 description = "autofoam and related tools"
 repository = "https://github.com/bmblb3/autofoam"
