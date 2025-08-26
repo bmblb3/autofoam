@@ -13,6 +13,10 @@ Repo for autofoam and related tools
   [this](https://www.rust-lang.org/tools/install) guide.
 * run `cargo install autofoam`
 
+### Pre-built binaries
+* Download the tar from [releases](https://github.com/bmblb3/autofoam/releases)
+* unpack the file and place the binaries in your system PATH
+
 ## License
 
 Licensed under either of
