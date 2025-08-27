@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.10](https://github.com/bmblb3/autofoam/compare/v0.2.9...v0.2.10) - 2025-08-27
+
+### Other
+
+- fix the CD actions so that the built binaries are actually uploaded to github releases
+
 ## [0.2.9](https://github.com/bmblb3/autofoam/compare/v0.2.8...v0.2.9) - 2025-08-27
 
 ### Other
