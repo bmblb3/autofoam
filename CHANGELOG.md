@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0](https://github.com/bmblb3/autofoam/compare/v0.2.10...v0.2.11) - 2025-09-23
+
+### Added
+
+- add `autofoam-print-as-vtt` => a utility to print a float in the vtt format
+
 ## [0.2.10](https://github.com/bmblb3/autofoam/compare/v0.2.9...v0.2.10) - 2025-08-27
 
 ### Other
