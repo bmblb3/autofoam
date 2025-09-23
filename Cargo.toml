@@ -10,5 +10,5 @@ license = "MIT OR Apache-2.0"
 
 [dependencies]
 clap = { version = "4.5.48", features = ["derive"] }
-tempfile = "3.21.0"
+tempfile = "3.23.0"
 vtkio = "0.6.3"
