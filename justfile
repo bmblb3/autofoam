@@ -28,6 +28,7 @@ asset_name := package_name + "-v" + package_version + "-x86_64-unknown-linux-mus
 release: build archive
     set -e
     trap 'just clean-assets' EXIT
+    git push
     release-plz release --git-token=$(gh auth token)
     gh release create v{{package_version}} --verify-tag {{asset_name}}.tar.gz {{asset_name}}.sha256
 
