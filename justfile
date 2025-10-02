@@ -2,7 +2,7 @@
 ci: audit lint test doctest doc
 
 audit:
-    command -v cargo-audit >/dev/null 2>&1 && cargo audit || echo "skipping audit"
+    if command -v cargo-audit &> /dev/null; then cargo audit; fi
 
 [parallel]
 lint:
@@ -25,19 +25,15 @@ pre-release:
 package_name := `cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].name'`
 package_version := `cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].version'`
 asset_name := package_name + "-v" + package_version + "-x86_64-unknown-linux-musl"
-release: build archive
+release: build
     git push
     release-plz release --git-token=$(gh auth token)
-    gh release create v{{package_version}} --verify-tag {{asset_name}}.tar.gz {{asset_name}}.sha256 --generate-notes
-    just clean-assets
+    @TMPDIR=$(mktemp -d) && \
+        tar -czf "$TMPDIR/{{asset_name}}.tar.gz" -C ./result/bin . && \
+        (cd "$TMPDIR" && sha256sum "{{asset_name}}.tar.gz" > "{{asset_name}}.sha256") && \
+        gh release upload v{{package_version}} \
+            "$TMPDIR/{{asset_name}}.tar.gz" \
+            "$TMPDIR/{{asset_name}}.sha256"
 
 build:
     nix build
-
-archive:
-    tar -czf {{asset_name}}.tar.gz -C ./result/bin .
-    sha256sum {{asset_name}}.tar.gz > {{asset_name}}.sha256
-
-clean-assets:
-    rm -f {{asset_name}}.tar.gz {{asset_name}}.sha256
-    rm -rf result
