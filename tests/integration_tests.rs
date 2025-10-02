@@ -6,9 +6,6 @@ use std::path::Path;
 mod tests {
     use super::*;
 
-    use std::sync::atomic::{AtomicUsize, Ordering};
-    static TEST_FILE_COUNTER: AtomicUsize = AtomicUsize::new(0);
-
     fn create_test_vtp_file() -> String {
         let test_data = r#"<?xml version="1.0"?>
 <VTKFile type="PolyData" version="1.0" byte_order="LittleEndian">
@@ -39,8 +36,8 @@ mod tests {
   </PolyData>
 </VTKFile>"#;
 
-        let count = TEST_FILE_COUNTER.fetch_add(1, Ordering::SeqCst);
-        let test_file = format!("test_data_{}.vtp", count);
+        let uuid = uuid::Uuid::new_v4();
+        let test_file = format!("test_data_{}.vtp", uuid);
         fs::write(&test_file, test_data).unwrap();
         test_file
     }
