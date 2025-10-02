@@ -18,3 +18,25 @@ doctest:
 
 doc:
     cargo doc --no-deps --document-private-items --all-features --workspace --examples
+
+pre-release:
+    release-plz update
+
+build:
+    nix build
+
+package_name := `cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].name'`
+package_version := `cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].version'`
+asset_name := package_name + "-v" + package_version + "-x86_64-unknown-linux-musl"
+archive:
+    tar -czf {{asset_name}}.tar.gz -C ./result/bin .
+    sha256sum {{asset_name}}.tar.gz > {{asset_name}}.sha256
+
+release: build archive
+    release-plz release
+    gh release create v{{package_version}} --verify-tag {{asset_name}}.tar.gz {{asset_name}}.sha256
+    just clean-assets
+
+clean-assets:
+    rm -f {{asset_name}}.tar.gz {{asset_name}}.sha256
+    rm -rf result
