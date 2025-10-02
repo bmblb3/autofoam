@@ -23,8 +23,20 @@
           inherit system overlays;
         };
         rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+        cargoToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
       in
       {
+        packages = {
+          default = pkgs.pkgsStatic.rustPlatform.buildRustPackage {
+            pname = cargoToml.package.name;
+            version = cargoToml.package.version;
+            src = ./.;
+            cargoLock = {
+              lockFile = ./Cargo.lock;
+            };
+          };
+        };
+
         devShells.default =
           with pkgs;
           mkShell {
