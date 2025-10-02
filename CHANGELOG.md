@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2](https://github.com/bmblb3/autofoam/compare/v0.3.1...v0.3.2) - 2025-10-02
+
+### Other
+
+- Fixes on asset releasing
+
 ## [0.3.1](https://github.com/bmblb3/autofoam/compare/v0.3.0...v0.3.1) - 2025-10-02
 
 ### Added
