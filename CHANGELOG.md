@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1](https://github.com/bmblb3/autofoam/compare/v0.3.0...v0.3.1) - 2025-10-02
+
+### Added
+
+- add flake for devShell and toolchain file
+- add static pacakge builder as a flake attribute
+- add justfile with ci, pre-release and release steps
+
+### Changed
+- use justfile ci in github actions
+- remove cd from github actions, I will do the release+publish from local dev env
+
 ## [0.3.0](https://github.com/bmblb3/autofoam/compare/v0.2.10...v0.2.11) - 2025-09-23
 
 ### Added
