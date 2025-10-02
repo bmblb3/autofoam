@@ -20,15 +20,7 @@ repos:
     hooks:
       - id: pre-commit
         name: pre-commit
-        entry: just pre-commit
-        language: system
-        pass_filenames: false
-
-  - repo: local
-    hooks:
-      - id: pre-push
-        name: pre-push
-        entry: just pre-push
+        entry: just
         language: system
         pass_filenames: false
 
