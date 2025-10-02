@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.5](https://github.com/bmblb3/autofoam/compare/v0.3.4...v0.3.5) - 2025-10-02
+
+### Other
+
+- improve justfile: check if cargo-audit exists before attempting to run it
+- improve justfile: atomic release
+
 ## [0.3.4](https://github.com/bmblb3/autofoam/compare/v0.3.3...v0.3.4) - 2025-10-02
 
 ### Other
