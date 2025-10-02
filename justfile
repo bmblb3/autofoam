@@ -1,5 +1,5 @@
 [parallel]
-default: audit lint test doctest doc
+ci: audit lint test doctest doc
 
 audit:
     cargo audit

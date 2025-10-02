@@ -20,7 +20,7 @@ repos:
     hooks:
       - id: pre-commit
         name: pre-commit
-        entry: just
+        entry: just ci
         language: system
         pass_filenames: false
 
