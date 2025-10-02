@@ -20,13 +20,13 @@ doc:
     cargo doc --no-deps --document-private-items --all-features --workspace --examples
 
 pre-release:
-    release-plz update --git-token=$(gh auth token)
+    release-plz update
 
 package_name := `cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].name'`
 package_version := `cargo metadata --no-deps --format-version=1 | jq -r '.packages[0].version'`
 asset_name := package_name + "-v" + package_version + "-x86_64-unknown-linux-musl"
 release: build archive
-    release-plz release
+    release-plz release --git-token=$(gh auth token)
     gh release create v{{package_version}} --verify-tag {{asset_name}}.tar.gz {{asset_name}}.sha256
     just clean-assets
 
