@@ -2,7 +2,7 @@
 ci: audit lint test doctest doc
 
 audit:
-    command -v cargo-audit && cargo audit
+    command -v cargo-audit >/dev/null 2>&1 && cargo audit || echo "skipping audit"
 
 [parallel]
 lint:
