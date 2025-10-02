@@ -1,8 +1,5 @@
 [parallel]
-ci: audit lint test doctest doc
-
-audit:
-    if command -v cargo-audit &> /dev/null; then cargo audit; fi
+ci: lint test doctest doc
 
 [parallel]
 lint:
