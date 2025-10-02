@@ -1,5 +1,5 @@
 [parallel]
-ci: audit lint test doctest doc
+ci: bootstrap audit lint test doctest doc
 
 audit:
     cargo audit
@@ -18,3 +18,7 @@ doctest:
 
 doc:
     cargo doc --no-deps --document-private-items --all-features --workspace --examples
+
+bootstrap:
+    if ! command -v cargo-audit > /dev/null; then cargo install cargo-audit; fi
+    if ! command -v cargo-nextest > /dev/null; then cargo install cargo-nextest; fi
