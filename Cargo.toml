@@ -10,9 +10,12 @@ license = "MIT OR Apache-2.0"
 
 [dependencies]
 clap = { version = "4.5.48", features = ["derive"] }
+color-eyre = "0.6.5"
+statrs = "0.18.0"
 tempfile = "3.23.0"
 uuid = { version = "1.18.1", features = ["v4"] }
 vtkio = "0.6.3"
 
 [dev-dependencies]
+approx = "0.5.1"
 rstest = "0.26.1"

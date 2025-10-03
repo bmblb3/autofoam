@@ -1,3 +1,5 @@
+mod rosin_rammler;
+
 use autofoam::vtk::VtpProcessor;
 use std::fs;
 use std::path::Path;
