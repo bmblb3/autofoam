@@ -42,6 +42,7 @@
           mkShell {
             buildInputs = [
               bacon
+              cargo-nextest
               cargo-semver-checks
               just
               pre-commit
