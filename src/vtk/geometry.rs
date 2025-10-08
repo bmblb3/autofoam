@@ -1,7 +1,9 @@
-use super::reader::get_poly_data;
 use std::error::Error;
+
 use vtkio::model::IOBuffer;
 use vtkio::Vtk;
+
+use super::reader::get_poly_data;
 
 pub type GeometryResult = Result<(Vec<f64>, Vec<usize>, Vec<usize>), Box<dyn Error>>;
 

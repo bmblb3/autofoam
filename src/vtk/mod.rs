@@ -5,10 +5,12 @@ pub mod field_manager;
 pub mod geometry;
 pub mod reader;
 
-use field_manager::FieldManager;
-use geometry::{GeometryExtractor, GeometryResult};
-use reader::VtkReader;
 use std::error::Error;
+
+use field_manager::FieldManager;
+use geometry::GeometryExtractor;
+use geometry::GeometryResult;
+use reader::VtkReader;
 
 pub struct VtpProcessor {
     reader: VtkReader,

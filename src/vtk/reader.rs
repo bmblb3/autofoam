@@ -1,7 +1,10 @@
 use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
-use vtkio::model::{DataSet, Piece, PolyDataPiece};
+
+use vtkio::model::DataSet;
+use vtkio::model::Piece;
+use vtkio::model::PolyDataPiece;
 use vtkio::Vtk;
 
 pub struct VtkReader {
@@ -57,8 +60,9 @@ pub fn get_poly_data_mut(vtk: &mut Vtk) -> Result<&mut PolyDataPiece, Box<dyn Er
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use std::fs;
+
+    use super::*;
 
     #[test]
     fn test_vtk_reader_creation() {

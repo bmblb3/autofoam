@@ -1,7 +1,6 @@
-use std::{
-    fs::File,
-    io::{Read, Seek},
-};
+use std::fs::File;
+use std::io::Read;
+use std::io::Seek;
 
 pub fn is_ascii(file: &mut File) -> bool {
     let mut header = [0u8; 5];
@@ -16,9 +15,13 @@ pub fn is_ascii(file: &mut File) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-    use std::io::{Seek, SeekFrom, Write};
+    use std::io::Seek;
+    use std::io::SeekFrom;
+    use std::io::Write;
+
     use tempfile::tempfile;
+
+    use super::*;
 
     #[test]
     fn test_is_ascii_with_ascii_stl() {

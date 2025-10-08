@@ -1,10 +1,11 @@
 use std::fs::File;
 use std::io::Seek;
 
-use clap::Parser;
-
 use autofoam::coordinates::update_coordinate_bounds;
-use autofoam::stl::{is_ascii, process_ascii_iter, process_binary_iter};
+use autofoam::stl::is_ascii;
+use autofoam::stl::process_ascii_iter;
+use autofoam::stl::process_binary_iter;
+use clap::Parser;
 
 #[derive(Parser)]
 #[command(about = "Prints the bbox of input stl file(s)")]

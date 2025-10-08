@@ -1,6 +1,7 @@
-use autofoam::vtk::VtpProcessor;
 use std::fs;
 use std::path::Path;
+
+use autofoam::vtk::VtpProcessor;
 
 #[cfg(test)]
 mod tests {

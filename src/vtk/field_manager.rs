@@ -1,7 +1,13 @@
-use super::reader::{get_poly_data, get_poly_data_mut};
 use std::error::Error;
-use vtkio::model::{Attribute, DataArray, ElementType, IOBuffer};
+
+use vtkio::model::Attribute;
+use vtkio::model::DataArray;
+use vtkio::model::ElementType;
+use vtkio::model::IOBuffer;
 use vtkio::Vtk;
+
+use super::reader::get_poly_data;
+use super::reader::get_poly_data_mut;
 
 pub struct FieldManager;
 

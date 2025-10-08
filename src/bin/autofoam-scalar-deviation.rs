@@ -1,8 +1,8 @@
 use std::error::Error;
 
+use autofoam::vtk::calculate_polygon_areas;
+use autofoam::vtk::VtpProcessor;
 use clap::Parser;
-
-use autofoam::vtk::{calculate_polygon_areas, VtpProcessor};
 
 #[derive(Parser)]
 #[command(about = "Computes and writes normalized deviation of a scalar field")]

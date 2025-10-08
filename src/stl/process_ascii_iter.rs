@@ -1,7 +1,6 @@
-use std::{
-    fs::File,
-    io::{BufRead, BufReader},
-};
+use std::fs::File;
+use std::io::BufRead;
+use std::io::BufReader;
 
 pub fn process_ascii_iter(
     file: File,
@@ -35,9 +34,13 @@ pub fn process_ascii_iter(
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-    use std::io::{Seek, SeekFrom, Write};
+    use std::io::Seek;
+    use std::io::SeekFrom;
+    use std::io::Write;
+
     use tempfile::NamedTempFile;
+
+    use super::*;
 
     fn create_test_file(content: &str) -> File {
         let mut temp_file = NamedTempFile::new().unwrap();

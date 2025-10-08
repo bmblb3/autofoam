@@ -1,5 +1,7 @@
 use std::fs::File;
-use std::io::{Read, Seek, SeekFrom};
+use std::io::Read;
+use std::io::Seek;
+use std::io::SeekFrom;
 
 pub fn process_binary_iter(
     file: File,
@@ -110,10 +112,14 @@ impl Iterator for BinaryVertexIterator {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use std::fs::File;
-    use std::io::{Seek, SeekFrom, Write};
+    use std::io::Seek;
+    use std::io::SeekFrom;
+    use std::io::Write;
+
     use tempfile::tempfile;
+
+    use super::*;
 
     fn create_test_stl(triangle_count: u32, vertices: &[[f32; 3]]) -> File {
         let mut file = tempfile().unwrap();

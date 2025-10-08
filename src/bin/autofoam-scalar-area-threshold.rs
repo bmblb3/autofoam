@@ -1,12 +1,11 @@
 use std::error::Error;
 
-use clap::{ArgGroup, Parser};
-
-use autofoam::{
-    histogram::weighted_histogram,
-    interpolation::interpolate,
-    vtk::{calculate_polygon_areas, VtpProcessor},
-};
+use autofoam::histogram::weighted_histogram;
+use autofoam::interpolation::interpolate;
+use autofoam::vtk::calculate_polygon_areas;
+use autofoam::vtk::VtpProcessor;
+use clap::ArgGroup;
+use clap::Parser;
 
 #[derive(Parser)]
 #[command(
