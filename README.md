@@ -1,5 +1,7 @@
 # QoL tools for OpenFOAM
 
+**NOTE**: Archiving, making proprietary
+
 [![Crates.io](https://img.shields.io/crates/v/autofoam.svg)](https://crates.io/crates/autofoam)
 [![Docs.rs](https://docs.rs/autofoam/badge.svg)](https://docs.rs/autofoam)
 [![CI](https://github.com/bmblb3/autofoam/workflows/CI/badge.svg)](https://github.com/bmblb3/autofoam/actions)
